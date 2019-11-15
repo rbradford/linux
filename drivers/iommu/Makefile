@@ -38,5 +38,6 @@ obj-$(CONFIG_S390_IOMMU) += s390-iommu.o
 obj-$(CONFIG_QCOM_IOMMU) += qcom_iommu.o
 obj-$(CONFIG_HYPERV_IOMMU) += hyperv-iommu.o
 obj-$(CONFIG_VIRTIO_IOMMU) += virtio-iommu.o
+obj-$(CONFIG_VIRTIO_IOMMU_TOPOLOGY) += virtio-iommu-topology.o
 obj-$(CONFIG_VIRTIO_IOMMU_TOPOLOGY_HELPERS) += virtio-iommu-topology-helpers.o
 obj-$(CONFIG_ACPI_VIOT) += viot.o

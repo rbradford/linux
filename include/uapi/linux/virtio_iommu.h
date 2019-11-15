@@ -16,6 +16,7 @@
 #define VIRTIO_IOMMU_F_BYPASS			3
 #define VIRTIO_IOMMU_F_PROBE			4
 #define VIRTIO_IOMMU_F_MMIO			5
+#define VIRTIO_IOMMU_F_TOPOLOGY			6
 
 struct virtio_iommu_range_64 {
 	__u64					start;
@@ -27,6 +28,11 @@ struct virtio_iommu_range_32 {
 	__u32					end;
 };
 
+struct virtio_iommu_topo_config {
+	__u16					num_items;
+	__u16					offset;
+};
+
 struct virtio_iommu_config {
 	/* Supported page sizes */
 	__u64					page_size_mask;
@@ -36,6 +42,29 @@ struct virtio_iommu_config {
 	struct virtio_iommu_range_32		domain_range;
 	/* Probe buffer size */
 	__u32					probe_size;
+	struct virtio_iommu_topo_config		topo_config;
+};
+
+#define VIRTIO_IOMMU_TOPO_PCI_RANGE		0x1
+#define VIRTIO_IOMMU_TOPO_MMIO			0x2
+
+struct virtio_iommu_topo_pci_range {
+	__u8					type;
+	__u8					reserved;
+	__u16					length;
+	__u32					endpoint_start;
+	__u16					segment;
+	__u16					bdf_start;
+	__u16					bdf_end;
+	__u16					padding;
+};
+
+struct virtio_iommu_topo_mmio {
+	__u8					type;
+	__u8					reserved;
+	__u16					length;
+	__u32					endpoint;
+	__u64					address;
 };
 
 /* Request types */
