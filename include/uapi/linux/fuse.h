@@ -274,7 +274,7 @@ struct fuse_file_lock {
  * FUSE_CACHE_SYMLINKS: cache READLINK responses
  * FUSE_NO_OPENDIR_SUPPORT: kernel supports zero-message opendir
  * FUSE_EXPLICIT_INVAL_DATA: only invalidate cached pages on explicit request
- * FUSE_MAP_ALIGNMENT: init_out.map_alignment contains byte alignment for
+ * FUSE_MAP_ALIGNMENT: init_out.map_alignment contains log2(byte alignment) for
  *		       foffset and moffset fields in struct
  *		       fuse_setupmapping_out and fuse_removemapping_one.
  */
@@ -658,9 +658,8 @@ struct fuse_init_out {
 	uint32_t	max_write;
 	uint32_t	time_gran;
 	uint16_t	max_pages;
-	uint16_t	padding;
-	uint32_t	map_alignment;
-	uint32_t	unused[7];
+	uint16_t	map_alignment;
+	uint32_t	unused[8];
 };
 
 #define CUSE_INIT_INFO_MAX 4096

@@ -1032,9 +1032,10 @@ static void process_init_reply(struct fuse_conn *fc, struct fuse_req *req)
 					max_t(unsigned int, arg->max_pages, 1));
 			}
 			if ((arg->flags & FUSE_MAP_ALIGNMENT) &&
-			    (FUSE_DAX_MEM_RANGE_SZ % arg->map_alignment)) {
-				printk(KERN_ERR "FUSE: map_alignment %u incompatible with dax mem range size %u\n",
-				       arg->map_alignment,
+			    (FUSE_DAX_MEM_RANGE_SZ % (1ul << arg->map_alignment))) {
+				printk(KERN_ERR "FUSE: map_alignment %u"
+				       " incompatible with dax mem range size"
+				       " %u\n", arg->map_alignment,
 				       FUSE_DAX_MEM_RANGE_SZ);
 				ok = false;
 			}
