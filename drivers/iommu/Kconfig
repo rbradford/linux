@@ -521,6 +521,7 @@ config VIRTIO_IOMMU
 	depends on ARM64
 	select IOMMU_API
 	select INTERVAL_TREE
+	select ACPI_VIOT if ACPI
 	help
 	  Para-virtualised IOMMU driver with virtio.
 
@@ -528,5 +529,9 @@ config VIRTIO_IOMMU
 
 config VIRTIO_IOMMU_TOPOLOGY_HELPERS
 	bool
+
+config ACPI_VIOT
+	bool
+	select VIRTIO_IOMMU_TOPOLOGY_HELPERS
 
 endif # IOMMU_SUPPORT
