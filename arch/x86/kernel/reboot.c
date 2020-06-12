@@ -517,7 +517,8 @@ static int __init reboot_init(void)
 	 */
 	rv = dmi_check_system(reboot_dmi_table);
 
-	if (!rv && efi_reboot_required() && !efi_runtime_disabled())
+	if (!rv && efi_reboot_required() && !efi_runtime_disabled() &&
+	    efi_enabled(EFI_RUNTIME_SERVICES))
 		reboot_type = BOOT_EFI;
 
 	return 0;
